@@ -1,6 +1,6 @@
 /*
 ******************************************************************************
-*@authors: Augusto Blauth Schneider e Lucas Ávila Kautzmann
+*@authors: Augusto Blauth Schneider
   * @date    setembro,2022
    * @info: 	calculadora com teclado matricial e 6 displays de 7 segmentos
    *
@@ -22,11 +22,11 @@
 #define coluna_2 0
 #define coluna_3 1
 
-//config timer multiplexação dos displays
+//config timer multiplexaÃ§Ã£o dos displays
 #define PSC_11 1599
 #define ARR_11 10
 
-//config timer multiplicação do teclado
+//config timer multiplicaÃ§Ã£o do teclado
 #define PSC_10 159
 #define ARR_10 99
 
@@ -50,7 +50,7 @@ uint16_t numeros[]={
 		0b1111110000111, //7.
 		0b1111111111111, //8.
 		0b1111111100111, //9.
-		0b1111111000000, //traço (10)
+		0b1111111000000, //traÃ§o (10)
 		0b1111110000000, //nada (11)
 		0b1111111110000, //p formar o + (12)
 		0b1111111110110, //p formar o X (13)
@@ -83,7 +83,7 @@ int disp_1_antes=0, disp_2_antes=0, disp_3_antes=0, disp_4_antes=0, disp_5_antes
 int coluna=0;
 int total_1=0, total_2=0;
 
-// FUNÇÂO ESCREVE NUMERO
+// FUNÃ‡Ã‚O ESCREVE NUMERO
 void escreve_num (int num){
 	//escreve no primeiro display
 	disp_1_atual = num;
@@ -94,7 +94,7 @@ void escreve_num (int num){
 	disp_5_atual = disp_4_antes;
 }
 
-// FUNÇÂO ATUALIZA DISPLAYS
+// FUNÃ‡Ã‚O ATUALIZA DISPLAYS
 void atualiza_disp (){
 	//atualiza o valor do disp_antes
 	disp_1_antes = disp_1_atual;
@@ -105,7 +105,7 @@ void atualiza_disp (){
 	disp_6_antes = disp_6_atual;
 }
 
-//FUNÇÃO ZERA DISPLAYS
+//FUNÃ‡ÃƒO ZERA DISPLAYS
 void zera_disp(){
 	disp_1_atual = 0;
 	disp_2_atual = 0;
@@ -115,7 +115,7 @@ void zera_disp(){
 	disp_6_atual = 11;
 }
 
-//FUNÇÃO DETECTA NUMERO PARA TROCA DE ESTADO (OPERAÇÂO - ESCREVENDO)
+//FUNÃ‡ÃƒO DETECTA NUMERO PARA TROCA DE ESTADO (OPERAÃ‡Ã‚O - ESCREVENDO)
 void detecta_num(int col, int l0, int l1, int l2, int l3){
 	if(col==coluna_0||col==coluna_1||col==coluna_2){
 		if(!l0){
@@ -148,7 +148,7 @@ void detecta_num(int col, int l0, int l1, int l2, int l3){
 	}
 }
 
-//FUNÇÃO SALVA FATOR
+//FUNÃ‡ÃƒO SALVA FATOR
 void salva_fator(int aux){
 	if(aux==1){
 		 if(disp_6_antes==10){ //se o numero for negativo
@@ -163,7 +163,7 @@ void salva_fator(int aux){
 	}
 }
 
-//FUNÇÃO ESCREVE RESULTADO
+//FUNÃ‡ÃƒO ESCREVE RESULTADO
 void distribui_result(int result){
 	 disp_1_atual = (((((result)%10000)%1000)%100)%10);
 	 disp_2_atual = (((((result)%10000)%1000)%100)/10);
@@ -242,7 +242,7 @@ int main(void)
 		TIM11->ARR=ARR_11;
 		TIM11->CR1|=TIM_CR1_CEN;
 
-	//variáveis
+	//variÃ¡veis
 	int L0_col0_atual=0, L1_col0_atual=0, L2_col0_atual=0, L3_col0_atual=0, L0_col0_antes=0, L1_col0_antes=0, L2_col0_antes=0;
 	int L0_col1_atual=0, L1_col1_atual=0, L2_col1_atual=0, L3_col1_atual=0, L0_col1_antes=0, L1_col1_antes=0, L2_col1_antes=0, L3_col1_antes=0;
 	int L0_col2_atual=0, L1_col2_atual=0, L2_col2_atual=0, L3_col2_atual=0, L0_col2_antes=0, L1_col2_antes=0, L2_col2_antes=0;
@@ -285,7 +285,7 @@ int main(void)
 	 		 }
 	 		 if(cont_disp==5){
 	 			 GPIOC->ODR&=~0x1FFF; //limpa o display
-	 			 GPIOC->ODR|=~(numeros[disp_6_atual])|(mux_disp[cont_disp]); //escreve no display do traço para numeros negativos (PC12 esta em 1, o resto em 0))
+	 			 GPIOC->ODR|=~(numeros[disp_6_atual])|(mux_disp[cont_disp]); //escreve no display do traÃ§o para numeros negativos (PC12 esta em 1, o resto em 0))
 
 	 			 cont_disp=-1;
 	 		 }
@@ -327,7 +327,7 @@ int main(void)
 		 				 		 escreve_num(7);
 		 				 	 }
 		 			 }
-		 			 if(!L3_col0_atual){			//MUDANÇA DE ESTADO PARA ZERANDO (*)
+		 			 if(!L3_col0_atual){			//MUDANÃ‡A DE ESTADO PARA ZERANDO (*)
 		 				 STATE_calc = Zerando;
 		 			 }
 		 			 //atualiza o valor do disp_antes
@@ -385,22 +385,22 @@ int main(void)
 		 				 		 atualiza_disp();
 		 				 	 }
 		 			 }
-		 			 if(!L3_col2_atual){			//MUDANÇA DE ESTADO PARA RESULTADO (#)
+		 			 if(!L3_col2_atual){			//MUDANÃ‡A DE ESTADO PARA RESULTADO (#)
 		 				 STATE_calc = Resultado;
 		 			 }
 		 		 }
 		 		 //VERIFICANDO COLUNA 3
 		 		 if(coluna==coluna_3){
-		 			 if(!L0_col3_atual){			//MUDANÇA DE ESTADO PARA SOMANDO (A)
+		 			 if(!L0_col3_atual){			//MUDANÃ‡A DE ESTADO PARA SOMANDO (A)
 		 				 STATE_calc = Somando;
 		 			 }
-		 			 if(!L1_col3_atual){			//MUDANÇA DE ESTADO PARA SUBTRAINDO (B)
+		 			 if(!L1_col3_atual){			//MUDANÃ‡A DE ESTADO PARA SUBTRAINDO (B)
 		 				 STATE_calc = Subtraindo;
 		 			 }
-		 			 if(!L2_col3_atual){			//MUDANÇA DE ESTADO PARA MULTIPLICANDO (C)
+		 			 if(!L2_col3_atual){			//MUDANÃ‡A DE ESTADO PARA MULTIPLICANDO (C)
 		 				 STATE_calc = Multiplicando;
 		 			 }
-		 			 if(!L3_col3_atual){			//MUDANÇA DE ESTADO PARA DIVIDINDO (D)
+		 			 if(!L3_col3_atual){			//MUDANÃ‡A DE ESTADO PARA DIVIDINDO (D)
 		 				 STATE_calc = Dividindo;
 		 			 }
 		 		 }
@@ -408,7 +408,7 @@ int main(void)
 		 	 }
 
 		 	 case Zerando:{
-		 		 //zera todas as variáveis da calculadora
+		 		 //zera todas as variÃ¡veis da calculadora
 		 		 zera_disp();
 		 		 total_1 = 0;
 		 		 total_2 = 0;
@@ -427,40 +427,40 @@ int main(void)
 		 		 //escreve +
 		 		 mostra_soma();
 
-		 		 //mudança de estado
+		 		 //mudanÃ§a de estado
 		 		 detecta_num(coluna, L0_col0_atual, L1_col0_atual, L2_col0_atual, L3_col0_atual);
 		 		 break;
 		 	 }
 
 		 	 case Subtraindo:{
-		 		 ope = 2; //ope = 2 -> subtração
+		 		 ope = 2; //ope = 2 -> subtraÃ§Ã£o
 		 		 salva_fator(1); //salvar primeiro fator
 		 		 //escreve -
 		 		 mostra_sub();
 
-		 		 //mudança de estado
+		 		 //mudanÃ§a de estado
 		 		 detecta_num(coluna, L0_col0_atual, L1_col0_atual, L2_col0_atual, L3_col0_atual);
 		 		 break;
 		 	 }
 
 		 	 case Multiplicando:{
-		 		 ope = 3; //ope = 3 -> multiplicação
+		 		 ope = 3; //ope = 3 -> multiplicaÃ§Ã£o
 		 		 salva_fator(1); //salvar primeiro fator
 		 		 //escreve X
 		 		 mostra_mult();
 
-		 		 //mudança de estado
+		 		 //mudanÃ§a de estado
 		 		 detecta_num(coluna, L0_col0_atual, L1_col0_atual, L2_col0_atual, L3_col0_atual);
 		 		 break;
 		 	 }
 
 		 	 case Dividindo:{
-		 		 ope = 4; //ope = 4 -> divisão
+		 		 ope = 4; //ope = 4 -> divisÃ£o
 		 		 salva_fator(1); //salvar primeiro fator
 		 		 //escreve /
 		 		 mostra_div();
 
-		 		 //mudança de estado
+		 		 //mudanÃ§a de estado
 		 		 detecta_num(coluna, L0_col0_atual, L1_col0_atual, L2_col0_atual, L3_col0_atual);
 		 		 break;
 		 	 }
@@ -472,7 +472,7 @@ int main(void)
 		 		 if(ope==1){
 		 			 if((total_1+total_2)<0){  //se a soma resulta em um numero negativo
 		 				   disp_6_atual = 10; //coloca sinal de negativo
-		 				   result = (((total_1)*-1)-total_2); //refaz a conta com o resultado em módulo
+		 				   result = (((total_1)*-1)-total_2); //refaz a conta com o resultado em mÃ³dulo
 		 			 }
 		 			 else{
 		 				   disp_6_atual = 11;
@@ -480,16 +480,16 @@ int main(void)
 		 			 }
 		 			 distribui_result(result);
 		 		 }
-		 		 //se for subtração
+		 		 //se for subtraÃ§Ã£o
 		 		 if(ope==2){
-		 			 if((total_1-total_2)<0){//se a subtração resulta em um numero negativo
+		 			 if((total_1-total_2)<0){//se a subtraÃ§Ã£o resulta em um numero negativo
 		 				   disp_6_atual = 10; //coloca sinal de negativo
 
 		 					if(total_1<0){ //se o primeiro fator for um numero negativo
-		 					 	result = (((total_1)*-1)+total_2); //refaz a conta com o resultado em módulo
+		 					 	result = (((total_1)*-1)+total_2); //refaz a conta com o resultado em mÃ³dulo
 		 					}
 		 					else{ //se forem dois numeros positivos com o segundo fator maio que o primeiro
-		 					 	result = (total_2-total_1); //refaz a conta com o resultado em módulo
+		 					 	result = (total_2-total_1); //refaz a conta com o resultado em mÃ³dulo
 		 					}
 		 			 }
 		 			 else{
@@ -498,11 +498,11 @@ int main(void)
 		 			 }
 		 			 distribui_result(result);
 		 		 }
-		 		 //se for multiplicação
+		 		 //se for multiplicaÃ§Ã£o
 		 		 if(ope==3){
-		 			 if((total_1*total_2)<0){ //se a multiplicação resulta em um numero negativo
+		 			 if((total_1*total_2)<0){ //se a multiplicaÃ§Ã£o resulta em um numero negativo
 		 				   disp_6_atual = 10; //coloca sinal de negativo
-		 				   result = (((total_1)*-1)*total_2); //refaz a conta com o resultado em módulo
+		 				   result = (((total_1)*-1)*total_2); //refaz a conta com o resultado em mÃ³dulo
 		 			 }
 		 			 else{
 		 				   disp_6_atual = 11;
@@ -510,7 +510,7 @@ int main(void)
 		 			 }
 		 			 distribui_result(result);
 		 		 }
-		 		 //se for divisão
+		 		 //se for divisÃ£o
 		 		 if(ope==4){
 		 			 if(total_2==0){//se o divisor for 0
 		 				  disp_1_atual = 10;
@@ -520,9 +520,9 @@ int main(void)
 		 				  disp_5_atual = 10;
 		 			 }
 		 			 else{
-		 				  if((total_1/total_2)<0){ //se a divisão resulta em um numero negativo
+		 				  if((total_1/total_2)<0){ //se a divisÃ£o resulta em um numero negativo
 		 					 	disp_6_atual = 10; //coloca sinal negativo
-		 					 	result = (((total_1)*-1)/total_2); //refaz a conta com o resultado em módulo
+		 					 	result = (((total_1)*-1)/total_2); //refaz a conta com o resultado em mÃ³dulo
 		 				  }
 		 				  else{
 		 					 	disp_6_atual = 11;
@@ -538,7 +538,7 @@ int main(void)
 	 			 total_2 = 0;
 
 	 			 atualiza_disp();
-	 			 //mudança de estado
+	 			 //mudanÃ§a de estado
 	 			 if(coluna==coluna_0){
 	 				 if(!L3_col0_atual){
 	 					 STATE_calc = Zerando;
