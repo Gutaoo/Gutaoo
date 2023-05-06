@@ -1,8 +1,8 @@
 - 👋 Hi, I’m @Gutaoo
-- 👀 I’m interested in sexo
-- 🌱 I’m currently learning sexo
-- 💞️ I’m looking to collaborate on sexo
-- 📫 How to reach me com sexo
+- 👀 I’m interested in something
+- 🌱 I’m currently learning something
+- 💞️ I’m looking to collaborate on somethings
+- 📫 How to reach me with somethings
 
 <!---
 Gutaoo/Gutaoo is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
