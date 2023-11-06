@@ -15,8 +15,6 @@ int main(){
     
     printf("\t**CONVERSOR GRAUS CELSIUS**");
          Sleep(2500);
-    printf("\n\t\tEh o gutao");
-         Sleep(1000);
     system("cls");
 
     do{
